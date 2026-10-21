@@ -1,0 +1,17 @@
+{
+  "name": "AcaDivity — Academic Activity Report",
+  "short_name": "AcaDivity",
+  "description": "Pencatatan kegiatan Tri Dharma & Penunjang dosen dan cetak LKB otomatis.",
+  "lang": "id",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#022c22",
+  "theme_color": "#064e3b",
+  "icons": [
+    { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "assets/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
