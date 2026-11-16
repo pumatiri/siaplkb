@@ -1,17 +1,9 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+  <base target="_top">
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="AcaDivity — pencatatan kegiatan Tri Dharma & Penunjang dosen dan cetak Laporan Kerja Bulanan (LKB) otomatis.">
-  <meta name="theme-color" content="#064e3b">
-  <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
-  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <link rel="manifest" href="manifest.webmanifest">
-  <!-- Alamat server Apps Script diatur di file config.js -->
-  <script src="config.js"></script>
-  <title>AcaDivity v4.0 — Academic Activity Report</title>
+  <title>Acvity v<?= appVersion ?> — Academic Activity Report</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -722,6 +714,20 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     }
+
+    /* --- CUSTOM LOGO ACVITY --- */
+.brand-mark {
+  background-image: url('https://drive.google.com/file/d/1FcTK1r6KCvv3ODq6Gfctoy5YctTN__Z4/view?usp=drive_link') !important;
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+.brand-mark i {
+  display: none !important; /* Menyembunyikan icon topi toga bawaan */
+}
   </style>
 </head>
 <body>
@@ -730,7 +736,7 @@
   <div id="bootView" class="boot">
     <div class="boot-logo"><i class="fa-solid fa-graduation-cap"></i></div>
     <div class="boot-bar"><span></span></div>
-    <p>MEMUAT ACADIVITY…</p>
+    <p>MEMUAT ACVITY…</p>
   </div>
 
   <!-- ====================== HALAMAN MASUK / DAFTAR ====================== -->
@@ -741,8 +747,8 @@
       <div class="brand">
         <div class="brand-mark"><i class="fa-solid fa-graduation-cap"></i></div>
         <div>
-          <div class="brand-name">AcaDivity</div>
-          <div class="brand-sub">Academic Activity Report · v4.0 Pro</div>
+          <div class="brand-name">Acvity</div>
+          <div class="brand-sub">Academic Activity Report · v<?= appVersion ?> Pro</div>
         </div>
       </div>
 
@@ -917,8 +923,8 @@
       <div class="side-brand brand">
         <div class="brand-mark"><i class="fa-solid fa-graduation-cap"></i></div>
         <div>
-          <div class="brand-name">AcaDivity</div>
-          <div class="brand-sub">v4.0 Pro Edition</div>
+          <div class="brand-name">Acvity</div>
+          <div class="brand-sub">v<?= appVersion ?> Pro Edition</div>
         </div>
         <button class="side-close" onclick="closeDrawer()" aria-label="Tutup menu"><i class="fa-solid fa-xmark"></i></button>
       </div>
@@ -931,7 +937,9 @@
 
       <div class="nav-label">Akun</div>
       <button class="nav-item" data-page="settings" onclick="go('settings')"><i class="fa-solid fa-gear"></i> Pengaturan</button>
-
+<!-- TAMBAHKAN MENU DONASI DI SINI -->
+<div class="nav-label">Dukungan</div>
+<button class="nav-item" onclick="openModal('donasiModal')" style="color: var(--gold);"><i class="fa-solid fa-hand-holding-dollar"></i> Donasi Pengembangan</button>
       <div id="adminNav" class="hidden">
         <div class="nav-label">Admin</div>
         <button class="nav-item admin-item" data-page="admin" onclick="go('admin')"><i class="fa-solid fa-user-shield"></i> Panel Admin <span class="badge-new">ADMIN</span></button>
@@ -956,7 +964,15 @@
         </div>
         <div class="ticker" id="ticker"><i class="fa-solid fa-bullhorn"></i><div class="ticker-track"><span id="tickerText"></span></div></div>
         <div class="top-actions">
-          <button class="icon-btn hidden" id="topAdminBtn" onclick="go('admin')" title="Panel Admin"><i class="fa-solid fa-user-shield" style="color:var(--gold)"></i></button>
+  <!-- Jam Digital -->
+  <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-700); padding: 5px 12px; background: var(--primary-soft); border-radius: 10px; margin-right: 5px; display: flex; align-items: center; gap: 6px; font-variant-numeric: tabular-nums;">
+    <i class="fa-regular fa-clock"></i> <span id="digitalClock">00:00:00</span>
+  </div>
+  
+  <!-- Tombol Fullscreen -->
+  <button class="icon-btn" onclick="toggleFullScreen()" title="Layar Penuh"><i class="fa-solid fa-expand"></i></button>
+
+  <button class="icon-btn hidden" id="topAdminBtn" onclick="go('admin')" title="Panel Admin"><i class="fa-solid fa-user-shield" style="color:var(--gold)"></i></button>
           <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" title="Ganti tema terang/gelap"><i class="fa-solid fa-moon"></i></button>
           <button class="avatar top-avatar" id="topAvatar" onclick="go('settings')" title="Profil">–</button>
         </div>
@@ -1348,7 +1364,7 @@
         </section>
       </div>
 
-      <footer class="app-footer">genuinely developed by: <b>BeeCOMP Tech Kediri</b> · AcaDivity v4.0</footer>
+      <footer class="app-footer">genuinely developed by: <b>BeeCOMP Tech Kediri</b> · Acvity v<?= appVersion ?></footer>
     </main>
 
     <!-- NAVIGASI BAWAH (HP) -->
@@ -1464,16 +1480,37 @@
 
   <div class="toast-stack" id="toastStack"></div>
 
+<!-- Modal Donasi -->
+<div id="donasiModal" class="modal" data-closable="1">
+  <div class="modal-card">
+    <div class="m-body">
+      <button class="modal-x" onclick="closeModal('donasiModal')" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+      <div class="m-icon ok" style="background: var(--gold-soft); color: var(--gold);"><i class="fa-solid fa-heart"></i></div>
+      <h3>Dukung Acvity</h3>
+      <p style="margin-bottom: 15px;">Dukungan Anda sangat berarti untuk memastikan aplikasi ini terus berjalan secara optimal, gratis, dan bebas iklan. Terima kasih atas apresiasi Anda!</p>
+      
+      <div style="background: var(--surface-2); padding: 15px; border-radius: 16px; border: 1px dashed var(--border-strong); display: inline-block;">
+        <!-- GANTI URL DI BAWAH DENGAN URL GAMBAR QRIS ANDA -->
+        <img src="https://drive.google.com/file/d/17gnqrkaArQGtThj9YwEpvf7bKe0GthsZ/view?usp=sharing" alt="QRIS Donasi BeeCOMP" style="width: 100%; max-width: 250px; border-radius: 12px;">
+      </div>
+      
+      <p style="font-size: 0.8rem; color: var(--muted); margin-top: 15px;">Pindai QRIS di atas menggunakan aplikasi m-Banking atau e-Wallet favorit Anda.</p>
+      <div class="m-actions">
+        <button class="btn btn-gold btn-block" onclick="closeModal('donasiModal')"><i class="fa-solid fa-check"></i> Selesai</button>
+      </div>
+    </div>
+  </div>
+</div>
   <!-- ============================ JAVASCRIPT ============================ -->
   <script>
     // ------------------------------------------------------------------
     // KONFIGURASI DARI SERVER & STATE
     // ------------------------------------------------------------------
-    let CFG = null;
+    let CFG = <?!= JSON.stringify({ version: appVersion, pengumuman: pengumuman, izinkanRegistrasi: izinkanRegistrasi, butuhKode: butuhKode }) ?>;
 
     // Mode berjalan: di dalam Apps Script (google.script.run) atau di GitHub Pages (fetch ke API_URL)
     const IS_GAS = !!(window.google && google.script && google.script.run);
-    const API_URL = (window.ACADIVITY_CONFIG && window.ACADIVITY_CONFIG.API_URL) || '';
+    const API_URL = (window.ACVITY_CONFIG && window.ACVITY_CONFIG.API_URL) || '';
 
     const S = {
       user: "", token: "", nama: "", history: [], profile: null, loaded: false,
@@ -2697,7 +2734,7 @@
     }
     function shareTempPass() {
       if (!S.tempPass) return;
-      const msg = `Halo, password sementara akun AcaDivity Anda (@${S.tempPass.user}) adalah: ${S.tempPass.pass}\nSilakan masuk, lalu segera ganti password di menu Pengaturan.`;
+      const msg = `Halo, password sementara akun Acvity Anda (@${S.tempPass.user}) adalah: ${S.tempPass.pass}\nSilakan masuk, lalu segera ganti password di menu Pengaturan.`;
       window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
     }
 
@@ -2706,6 +2743,28 @@
       b.classList.add('done');
       setTimeout(() => b.remove(), 600);
     }
+
+    // --- FITUR JAM DIGITAL ---
+function updateClock() {
+  const clockEl = document.getElementById('digitalClock');
+  if (clockEl) {
+    const now = new Date();
+    clockEl.textContent = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  }
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// --- FITUR FULLSCREEN ---
+function toggleFullScreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(err => {
+      toast("Browser ini tidak mendukung fitur fullscreen otomatis.", "warning");
+    });
+  } else {
+    if (document.exitFullscreen) document.exitFullscreen();
+  }
+}
   </script>
 </body>
 </html>
